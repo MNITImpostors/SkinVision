@@ -3,8 +3,13 @@ import Loader from './Loader';
 
 export default ({ resultProp }) => {
 	const [loading, setLoading] = useState(true)
+	const [result, setResult] = useState(resultProp)
 	
 	useEffect(() => {
+		if(result) {
+			setResult("Malignant")
+		}
+
 		setInterval(() => {
 			setLoading(false);
 		}, 5000)
