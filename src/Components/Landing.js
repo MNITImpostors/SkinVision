@@ -1,11 +1,14 @@
 import React from 'react';
-import Download from './Download';
+import Navbar from './Navbar';
+import Result from './Result';
 import { FaDownload } from "react-icons/fa";
 
 class Landing extends React.Component {
-	state = {
-		showResults: false
+	state ={
+		showResults: false,
+		result: ""
 	}
+
 	handleClick = () => {
 		var fileInput = document.getElementById('file-upload');
 		fileInput.click()
@@ -14,12 +17,23 @@ class Landing extends React.Component {
 		e.preventDefault();
 		const data = new FormData();
 		data.append('file', this.uploadInput.files[0]);
-		fetch('http://localhost:5000/upload', {
+		fetch('/upload', {
 			method: 'POST',
 			body: data
 		}).then((response) => {
 			response.json().then((body) => {
-				console.log(body);
+				let nums = body.y.split("[[");
+				let str1 = nums[1];
+				let scores = str1.split(" ");
+				
+				let benign = parseFloat(scores[0]);
+				let malignant = parseFloat(scores[1]);
+
+				if(benign > malignant) {
+					this.setState(() => ({result: "Benign"}))
+				} else {
+					this.setState(() => ({result: "Malignant"}))
+				}
 			});
 		}).catch((error) => {
 			console.error(error);
@@ -28,14 +42,13 @@ class Landing extends React.Component {
 	}
 	render(){
 		return (
-			<div>
-				{this.state.showResults && <Download />}
-				{this.state.showResults || 
-					<div>	
-						<h2>Upload Resume (PDF or Doc)</h2>
-						<p></p>
+			<>
+				<Navbar />
+				{this.state.showResults || (
+					<div style={{"marginTop": "10%"}}>	
+						<h2 className="uploader-title">Upload Skin Image</h2>
 						<form className="uploader" id="file-upload-form">
-							<div>
+							<div className="upload-div">
 								<input type="file" name="resume" ref={(ref) => { this.uploadInput = ref; }} accept=".jpg, .jpeg" id="file-upload" onChange={this.handleChange}/>
 								<label id="file-label" >
 									<div id="start">
@@ -43,15 +56,18 @@ class Landing extends React.Component {
 											<FaDownload size={60} className="icon"/>
 										</div>
 										<div>Select a file</div>
-										<span id="file-upload-btn" className="btn btn-primary" onClick={this.handleClick}>Upload</span>
+										<span id="file-upload-btn" className="btn" onClick={this.handleClick}>Upload</span>
 									</div>
 								</label>
 							</div>
-					 		<p></p>
+							<p></p>
 						</form>
 					</div>
-				}
-			</div>
+				)}
+				{this.state.showResults && (
+					<Result resultProp = {this.state.result}/>
+				)}
+			</>
 		)
 	}
 };

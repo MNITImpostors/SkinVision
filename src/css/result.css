@@ -1,0 +1,11 @@
+.result-section {
+  margin-top: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-text {
+  font-family: "Alata";
+  font-size: 40px;
+}

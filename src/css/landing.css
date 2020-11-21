@@ -1,0 +1,95 @@
+.uploader {
+  display: block;
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+label {
+  float: left;
+  clear: both;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: #fff;
+  border-radius: 7px;
+  border: 3px solid #eee;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+#start {
+  float: left;
+  clear: both;
+  width: 100%;
+}
+
+.icon {
+  transform: scale(0.8);
+  opacity: 0.3;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+div {
+  margin: 0 0 0.5rem 0;
+}
+
+.btn {
+  display: inline-block;
+  margin: 0.5rem 0.5rem 1rem 0.5rem;
+  clear: both;
+  font-weight: 700;
+  font-size: 20px;
+  text-decoration: none;
+  text-transform: initial;
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  padding: 0 1rem;
+  height: 36px;
+  line-height: 36px;
+  color: #1ee2e7;
+  box-sizing: border-box;
+  background: #000000;
+  border-color: #000000;
+  cursor: pointer;
+  font-family: "Alata";
+}
+
+.btn:hover {
+  color: #fec503;
+}
+
+#outer {
+  width: 100%;
+  text-align: center;
+}
+
+.inner {
+  display: inline-block;
+}
+
+#file-label:hover {
+  border-color: #000000;
+}
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
+
+.upload-div {
+  margin-top: 40px;
+}
+
+.uploader-title {
+  color: #000000;
+}
+
+.loader-div {
+  margin-top: 25%;
+}

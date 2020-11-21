@@ -1,0 +1,31 @@
+.navbar-div {
+  display: flex;
+  height: 70px;
+  background-color: #222;
+  margin: 0;
+  text-align: center;
+  align-items: center;
+}
+
+.navbar-heading {
+  font-family: "Alata";
+  color: #1ee2e7;
+  background-color: transparent;
+  margin-left: 12px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 30px;
+}
+
+.navbar-heading:hover {
+  color: #fec503;
+}
+
+.navbar-item {
+  background-color: transparent;
+}
+
+.navbar-list {
+  display: flex;
+  align-items: center;
+}
