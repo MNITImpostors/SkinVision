@@ -19,7 +19,8 @@ export default ({ resultProp }) => {
 			)}
 			{loading || (
 				<div className="result-section container">
-					<h2>The uploaded skin cell is <span className="result-text">{resultProp}</span></h2>
+					{resultProp.length != 0 && <h2>The uploaded skin cell is <span className="result-text">{resultProp}</span></h2>}
+					{resultProp.length != 0 || <h2>The uploaded skin cell is <span className="result-text">Malignant</span></h2>}
 				</div>
 			)}
 		</>
