@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default  () => {
+export default  ({handleNav}) => {
     return (
         <>
             <div className="navbar-div">
-                <div className="navbar-heading">
+                <div className="navbar-heading" onClick={handleNav}>
                     SkinVision
                 </div>
 

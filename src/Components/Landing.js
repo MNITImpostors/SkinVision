@@ -9,6 +9,12 @@ class Landing extends React.Component {
 		result: ""
 	}
 
+	handleNav = () => {
+		this.setState(() => ({
+			showResults: false
+		}))
+	}
+
 	handleClick = () => {
 		var fileInput = document.getElementById('file-upload');
 		fileInput.click()
@@ -43,7 +49,7 @@ class Landing extends React.Component {
 	render(){
 		return (
 			<>
-				<Navbar />
+				<Navbar handleNav={this.handleNav} />
 				{this.state.showResults || (
 					<div style={{"marginTop": "10%"}}>	
 						<h2 className="uploader-title">Upload Skin Image</h2>
