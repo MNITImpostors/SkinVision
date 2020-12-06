@@ -1,12 +1,19 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Result from './Result';
+import Login from './Login';
 import { FaDownload } from "react-icons/fa";
 
 class Landing extends React.Component {
 	state ={
 		showResults: false,
-		result: ""
+		result: "",
+		loggedIn: false
+	}
+
+	constructor() {
+		super()
+		this.handleSignIn = this.handleSignIn.bind(this);
 	}
 
 	handleNav = () => {
@@ -46,32 +53,44 @@ class Landing extends React.Component {
 		});
 		this.setState(() => ({showResults: true}))
 	}
+
+	handleSignIn() {
+		this.setState(() => ({loggedIn: true}))
+	}
+
 	render(){
 		return (
 			<>
 				<Navbar handleNav={this.handleNav} />
-				{this.state.showResults || (
-					<div style={{"marginTop": "10%"}}>	
-						<h2 className="uploader-title">Upload Skin Image</h2>
-						<form className="uploader" id="file-upload-form">
-							<div className="upload-div">
-								<input type="file" name="resume" ref={(ref) => { this.uploadInput = ref; }} accept=".jpg, .jpeg" id="file-upload" onChange={this.handleChange}/>
-								<label id="file-label" >
-									<div id="start">
-										<div id="icons">
-											<FaDownload size={60} className="icon"/>
-										</div>
-										<div>Select a file</div>
-										<span id="file-upload-btn" className="btn" onClick={this.handleClick}>Upload</span>
-									</div>
-								</label>
-							</div>
-							<p></p>
-						</form>
-					</div>
+				{this.state.loggedIn || (
+					<Login handleSignIn={this.handleSignIn}/>
 				)}
-				{this.state.showResults && (
-					<Result resultProp = {this.state.result}/>
+				{this.state.loggedIn && (
+					<>
+						{this.state.showResults || (
+							<div style={{"marginTop": "10%"}}>	
+								<h2 className="uploader-title">Upload Skin Image</h2>
+								<form className="uploader" id="file-upload-form">
+									<div className="upload-div">
+										<input type="file" name="resume" ref={(ref) => { this.uploadInput = ref; }} accept=".jpg, .jpeg" id="file-upload" onChange={this.handleChange}/>
+										<label id="file-label"  className="landing-label">
+											<div id="start">
+												<div id="icons">
+													<FaDownload size={60} className="icon"/>
+												</div>
+												<div>Select a file</div>
+												<span id="file-upload-btn" className="btn" onClick={this.handleClick}>Upload</span>
+											</div>
+										</label>
+									</div>
+									<p></p>
+								</form>
+							</div>
+						)}
+						{this.state.showResults && (
+							<Result resultProp = {this.state.result}/>
+						)}
+					</>
 				)}
 			</>
 		)

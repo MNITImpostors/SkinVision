@@ -1,0 +1,52 @@
+.login-div {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-form {
+  border-radius: 7px;
+  border: 3px solid #eee;
+  transition: all 0.2s ease;
+  user-select: none;
+  width: 400px;
+  padding: 30px;
+}
+
+.login-form__item {
+  margin-top: 15px;
+}
+
+.login-form__input {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  width: 80%;
+  box-sizing: border-box;
+  font-family: "Alata";
+  color: #000000;
+  font-size: 13px;
+}
+
+.login-form__label {
+  font-family: "Alata";
+  color: #000000;
+}
+
+.login-form__signup {
+  font-family: "Alata";
+  color: #000000;
+}
+
+.signup-button {
+  cursor: pointer;
+  border: 0;
+  outline: none;
+}
+
+.login-form__error {
+  font-family: "Alata";
+  color: red;
+  font-size: 16px;
+}

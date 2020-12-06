@@ -2,7 +2,8 @@ import React from 'react';
 
 import './css/landing.css';
 import './css/navbar.css';
-import './css/result.css'
+import './css/result.css';
+import './css/login.css';
 import './App.css';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
