@@ -6,6 +6,8 @@ export default ({handleSignIn}) => {
     const [currentUser, setCurrentUser] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [newName, setNewName] = useState("");
+    const [hospital, setHospital] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [error, setError] = useState(false);
@@ -23,6 +25,22 @@ export default ({handleSignIn}) => {
             setPassword(e.target.value);
         } else {
             setPassword("");
+        }
+    }
+
+    const handleNewNameChange = (e) => {
+        if(e.target.value) {
+            setNewName(e.target.value);
+        } else {
+            setNewName("");
+        }
+    }
+
+    const handleHospitalChange = (e) => {
+        if(e.target.value) {
+            setHospital(e.target.value);
+        } else {
+            setHospital("");
         }
     }
 
@@ -45,8 +63,10 @@ export default ({handleSignIn}) => {
     const addDoctor = (e) => {
         
         firestore.collection('doctors').add({
+            name: newName,
+            hospital: hospital,
             email: newEmail,
-            password: md5(newPassword)
+            password: md5(newPassword),
         })
 
         setNewEmail("")
@@ -96,6 +116,12 @@ export default ({handleSignIn}) => {
                     {currentUser || (
                         <>
                             <h2>Sign Up</h2>
+                            <div className="login-form__item">
+                                <input className="login-form__input" value={newName} placeholder="Name" onChange={handleNewNameChange}/>
+                            </div>
+                            <div className="login-form__item">
+                                <input className="login-form__input" value={hospital} placeholder="Hospital" onChange={handleHospitalChange}/>
+                            </div>
                             <div className="login-form__item">
                                 <input className="login-form__input" value={newEmail} placeholder="Email" onChange={handleNewEmailChange}/>
                             </div>

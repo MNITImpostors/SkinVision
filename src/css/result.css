@@ -1,6 +1,6 @@
 .result-section {
   margin-top: 25%;
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
 }
