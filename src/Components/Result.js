@@ -7,7 +7,6 @@ export default ({ resultProp, phonenumber, reuploadImage }) => {
 	const [result, setResult] = useState("")
 	
 	useEffect(() => {
-		console.log(reuploadImage)
 		firestore.collection('users').where("phonenumber", "==", phonenumber).get()
 		.then((query) => {
 			query.forEach((doc) => {
@@ -19,6 +18,34 @@ export default ({ resultProp, phonenumber, reuploadImage }) => {
 			setLoading(false);
 		}, 5000)
 	}, [])
+
+	const handleBenignChange = () => {
+		firestore.collection('users').where("phonenumber", "==", phonenumber).get()
+			.then((query) => {
+				query.forEach((doc) => {
+					firestore.collection('users').doc(doc.id).update({
+						result: "Benign"
+					})
+				})
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}
+
+	const handleMalignnantChange = () => {
+		firestore.collection('users').where("phonenumber", "==", phonenumber).get()
+			.then((query) => {
+				query.forEach((doc) => {
+					firestore.collection('users').doc(doc.id).update({
+						result: "Malignant"
+					})
+				})
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}
 
 	return (
 		<>
@@ -33,6 +60,13 @@ export default ({ resultProp, phonenumber, reuploadImage }) => {
 					{resultProp.length !== 0 || <h2>The uploaded skin cell is <div className="result-text">{result}</div></h2>}
 					<div className="login-form__signup" style={{marginTop: "25px"}}>
 						<button className="signup-button" style={{color: "#fec503"}} onClick={() => {reuploadImage()}}>Reupload Image of User</button>
+					</div>
+					<div className="login-form__signup" style={{marginTop: "25px"}}>
+						<span style={{color: "#00000"}}>Submit Actual Test Result</span> 	
+					</div>
+					<div className="result__div">
+						<button className="btn" onClick={handleBenignChange}>Benign</button>
+						<button className="btn" onClick={handleMalignnantChange}>Malignant</button>
 					</div>
 				</div>
 

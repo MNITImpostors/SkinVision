@@ -9,3 +9,10 @@
   font-family: "Alata";
   font-size: 40px;
 }
+
+.result__div {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  margin-left: 400px;
+}

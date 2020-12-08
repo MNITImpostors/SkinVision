@@ -60,6 +60,7 @@ class Landing extends React.Component {
 			body: data
 		}).then((response) => {
 			response.json().then((body) => {
+				console.log(body)
 				let nums = body.y.split("[[");
 				let str1 = nums[1];
 				let scores = str1.split(" ");
