@@ -28,12 +28,12 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 read = lambda imname: np.asarray(Image.open(imname).resize((224,224),Image.ANTIALIAS).convert("RGB"))
-json_file = open('./models/resnet50.json', 'r')
+json_file = open('./models/model.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
 # load weights into new model
-loaded_model.load_weights("./models/resnet50.h5")
+loaded_model.load_weights("./models/model.h5")
 
 json_auto_file = open('./models/autoencoder.json', 'r')
 autoencoder_json = json_auto_file.read()
