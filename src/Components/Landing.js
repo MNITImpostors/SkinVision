@@ -18,7 +18,8 @@ class Landing extends React.Component {
 			getUserDetails: false,
 			username: "",
 			phoneNumber: "", 
-			imageb64String: ""
+			imageb64String: "",
+			error: false
 		}
 
 		this.handleSignIn = this.handleSignIn.bind(this)
@@ -60,34 +61,40 @@ class Landing extends React.Component {
 			body: data
 		}).then((response) => {
 			response.json().then((body) => {
-				console.log(body)
-				let nums = body.y.split("[[");
-				let str1 = nums[1];
-				let scores = str1.split(" ");
-				
-				let benign = parseFloat(scores[0]);
-				let malignant = parseFloat(scores[1]);
+				if(body.y) {
+					let nums = body.y.split("[[");
+					let str1 = nums[1];
+					let scores = str1.split(" ");
+					
+					let benign = parseFloat(scores[0]);
+					let malignant = parseFloat(scores[1]);
 
-				if(benign > malignant) {
-					this.setState(() => ({result: "Benign"}))
-				} else {
-					this.setState(() => ({result: "Malignant"}))
-				}
-				
-				firestore.collection('users').where("phonenumber", "==", this.state.phoneNumber).get()
-				.then((query) => {
-					query.forEach((doc) => {
-						firestore.collection('users').doc(doc.id).update({
-							result: this.state.result,
+					if(benign > malignant) {
+						this.setState(() => ({result: "Benign"}))
+					} else {
+						this.setState(() => ({result: "Malignant"}))
+					}
+					
+					firestore.collection('users').where("phonenumber", "==", this.state.phoneNumber).get()
+					.then((query) => {
+						query.forEach((doc) => {
+							firestore.collection('users').doc(doc.id).update({
+								result: this.state.result,
+							})
 						})
 					})
-				})
+
+					this.setState(() => ({error: false}))
+					this.setState(() => ({showResults: true}))
+				} else {
+					this.setState(() => ({error: true}))
+				}
+				
 
 			});
 		}).catch((error) => {
 			console.error(error);
 		});
-		this.setState(() => ({showResults: true}))
 	}
 
 	handleSignIn() {
@@ -178,7 +185,7 @@ class Landing extends React.Component {
 													</div>
 												</label>
 											</div>
-											<p></p>
+											{this.state.error && <div className="login-form__error">Not a skin image!! Reupload Image</div>}
 										</form>
 									</div>
 								)}
